@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-    int a=0,b=0,c=0,cifras,nro,bloques;
+    int a=0,b=0,c=0,cifras,acumula=0,nro,bloques,dig;
     cout << "Escribir un número del 1 al 999 999 999 999" << endl;
     cin>>nro;
     for(int i=1;((nro>=(pow(10,i)))&&(i<=11));i++){
@@ -17,16 +17,19 @@ int main()
         else{bloques=4;}
         }
     }
+	dig=cifras;
     for(int i=0,j=0;(i<(cifras/3.00));i++){
-        j=cifras%3;
+        j=dig%3;
+		nro=nro-acumula*(pow(10,((bloques)*3)));
         if(j==0){
-            a=(nro/pow(10,cifras-i-1));
-            b=(nro/pow(10,cifras-i-2))-a*10;
-            c=(nro/pow(10,cifras-i-3))-b*10;
+            a=(nro/pow(10,dig-1));
+            b=(nro/pow(10,dig-2))-a*10;
+            c=(nro/pow(10,dig-3))-(a*100+b*10);
         }else{if (j==2){
-            b=(nro/pow(10,cifras-i-1));
-            c=(nro/pow(10,cifras-i-2))-b*10;
-        }else{c=nro/pow(10,cifras-i-1);}}
+            b=(nro/pow(10,dig-i-1));
+            c=(nro/pow(10,dig-i-2))-b*10;
+        }else{c=nro/pow(10,dig-i-1);}}
+		cout<<c<<"ja"<<endl;
         if(a==1){
             if((a==1)&&(b==0)&&(c==0)){
                 cout<<"Cien ";
@@ -81,19 +84,19 @@ int main()
                 cout<<"Treinta ";
                 }else{cout<<"Treinta y ";}
                 }else{if(b==4){if(c==0){
-                cout<<"Treinta ";
+                cout<<"Cuarenta ";
                 }else{cout<<"Cuarenta y  ";}
                 }else{if(b==5){if(c==0){
-                cout<<"Treinta ";
+                cout<<"Cincuenta ";
                 }else{cout<<"Cincuenta y  ";}
                 }else{if(b==6){if(c==0){
-                cout<<"Treinta ";
+                cout<<"Sesenta";
                 }else{cout<<"Sesenta y  ";}
                 }else{if(b==7){if(c==0){
-                cout<<"Treinta ";
+                cout<<"Setenta ";
                 }else{cout<<"Setenta y  ";}
                 }else{if(b==8){if(c==0){
-                cout<<"Treinta ";
+                cout<<"Ochenta ";
                 }else{cout<<"Ochenta y  ";}
                 }else{if(b==9)if(c==0){
                 cout<<"Noventa ";
@@ -104,35 +107,39 @@ int main()
         }
         if(c==1){
                 cout<<"Uno ";
-                }else{if(a==3){
+                }else{if(c==3){
                 cout<<"Dos ";
-                }else{if(a==3){
+                }else{if(c==3){
                 cout<<"Tres ";
-                }else{if(a==4){
+                }else{if(c==4){
                 cout<<"Cuatro ";
-                }else{if(a==5){
+                }else{if(c==5){
                 cout<<"Cinco ";
-                }else{if(a==6){
+                }else{if(c==6){
                 cout<<"Seis ";
-                }else{if(a==7){
+                }else{if(c==7){
                 cout<<"Siete ";
-                }else{if(a==8){
+                }else{if(c==8){
                 cout<<"Ocho ";
-                }else{if(a==9){
+                }else{if(c==9){
                 cout<<"Nueve ";
                 }}}}}}}}}
-
-        if(bloques-i==4||bloques-i==2){if(a!=0||b!=0||c!=0)cout<<"Mil ";}
-        if(bloques-i==3){
+		bloques=bloques-1;
+        if(bloques==3||bloques==1){if(a!=0||b!=0||c!=0)cout<<"Mil ";}
+        if(bloques==2){
             if(c==1){cout<<"Millon ";}
             else{if(c>1||b>=1||a>=1){cout<<"Millones";}}
         }
         cout<<a<<"ja"<<b<<"ja"<<c<<"ja"<<endl;
-        cout<<i<<endl;
+        
+		acumula=a*100+10*b+c;
         a=0;
         b=0;
-        c=0;
-        if(cifras%3==0){j=j-cifras%3;}else{j=j-3;}
+        c=0;	
+		
+        if(j==0){dig=dig-3;}else{dig=dig-j;}
+		cout<<nro<<endl;
+		cout<<bloques<<endl;
     }
     return 0;
 }
