@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1522724250 source:c:\users\wilber\documents\github\cc2\cifrado\main.cpp
+	<iostream>
+	<fstream>
+	<string.h>
+
