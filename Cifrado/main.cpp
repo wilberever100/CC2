@@ -4,7 +4,7 @@
 #include <string.h>
 using namespace std;
 
-string mensaje;
+char mensaje[50];
 int clave,tamano;
 int pes;
 int modulo(int a,int b){
