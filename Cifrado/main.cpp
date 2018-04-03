@@ -39,7 +39,7 @@ int mod_inverso(int a,int b){
 
 int escribiendo(int code[]){
     ofstream escritura;
-    string elemento;
+    char elemento;
     escritura.open("cipher.txt",ios::out);
     for(int i=0;i<tamano;i++){
             elemento=code[i];
@@ -86,16 +86,34 @@ void descifrado(){
 	}
 }
 int cifrado(){
+
     cout << "Ingrese una clave privada" << endl;
     cin>>clave;
     if(mod_inverso(clave,256)==0){cout<<"Esa clave no es permitida, elija otra"<<endl; return 0;}
-    ifstream leer;
-	leer.open("plain1.txt",ios::out|ios::in);
-	if(leer.is_open()){
+    ifstream lectura;
+	lectura.open("plain1.txt",ios::out|ios::in);
+	if(lectura.is_open()){
+	    char i;
+        lectura>>i;
+        mensaje=i;;
+        int temp=0;
+        cout<<mensaje<<endl;
+        while(!lectura.eof()){
+            /*if(i='\n'){
+                cout<<char(modulo(int(i)*publica,256))<<endl;
+            }*/
+            if(temp==1){
+                mensaje=mensaje+i;
+                lectura>>i;
+                if(i=='\0'){mensaje=mensaje+' ';}
+                if(i=='\t'){mensaje=mensaje+"   ";}
+            }else{
+                temp=1;
+                lectura>>i;}
 
-		cout<<"Abierto OK lectura"<<endl;
-		cout<<"El mensaje es: "<<endl;
-		leer>>mensaje;
+		}
+		cout<<"Encuentre el mensaje descifrado en plain2.txt "<<endl;
+		cout<<mensaje<<endl;
 
 	}else{
 		cout<<"El archivo no se pudo leer"<<endl;
