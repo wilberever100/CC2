@@ -4,7 +4,7 @@
 #include <string.h>
 using namespace std;
 
-char mensaje[50];
+string mensaje;
 int clave,tamano;
 int pes;
 int modulo(int a,int b){
@@ -39,7 +39,7 @@ int mod_inverso(int a,int b){
 
 int escribiendo(int code[]){
     ofstream escritura;
-    char elemento;
+    string elemento;
     escritura.open("cipher.txt",ios::out);
     for(int i=0;i<tamano;i++){
             elemento=code[i];
@@ -94,7 +94,7 @@ int cifrado(){
 	lectura.open("plain1.txt",ios::out|ios::in);
 	if(lectura.is_open()){
 	    char i;
-        lectura>>i;
+        i=lectura.get();
         mensaje=i;;
         int temp=0;
         cout<<mensaje<<endl;
@@ -104,12 +104,12 @@ int cifrado(){
             }*/
             if(temp==1){
                 mensaje=mensaje+i;
-                lectura>>i;
-                if(i=='\0'){mensaje=mensaje+' ';}
-                if(i=='\t'){mensaje=mensaje+"   ";}
+                i=lectura.get();
+                cout<<i<<endl;
             }else{
                 temp=1;
-                lectura>>i;}
+                i=lectura.get();
+                cout<<i<<endl;}
 
 		}
 		cout<<"Encuentre el mensaje descifrado en plain2.txt "<<endl;
@@ -124,9 +124,10 @@ int cifrado(){
     int code[tamano];
     for(int i=0;i<tamano;i++){
         code[i]=modulo((int(mensaje[i])*clave),256);
-        cout<<code[i]<<endl;
+        cout<<char(code[i]);
 
     }
+    cout<<endl;
     escribiendo(code);
     return 0;
 }
